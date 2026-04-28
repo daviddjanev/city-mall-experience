@@ -52,20 +52,11 @@ export function TaxiBanner() {
           <img
             src={taxiBanner}
             alt="Štip City Taxi — меѓуградски такси превоз, електрично возило"
-            className="block w-full h-auto select-none"
-            style={{
-              transform: "scale(1)",
-              transition: "transform 900ms cubic-bezier(0.22,1,0.36,1), filter 600ms ease",
-              imageRendering: "auto",
-            }}
+            className="block w-full h-auto select-none transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.025]"
             draggable={false}
           />
-          <span
-            className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-cream/10 group-hover:ring-cream/25 transition"
-          />
-          <span
-            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/30 via-transparent to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-700"
-          />
+          <span className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-cream/10 group-hover:ring-cream/25 transition" />
+          <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/30 via-transparent to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-700" />
           <style>{`
             .taxi-img-hover:hover img { transform: scale(1.025); }
           `}</style>
