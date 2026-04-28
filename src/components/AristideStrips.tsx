@@ -32,8 +32,8 @@ export function AristideStrips() {
       <div
         className="relative flex w-full px-6 md:px-10 gap-2 md:gap-3"
         style={{ height: "min(78vh, 760px)" }}
-        onMouseLeave={() => setActive(null)}
       >
+
         {businesses.map((b, i) => {
           const isActive = active === i;
           const isDimmed = active !== null && !isActive;
@@ -44,17 +44,17 @@ export function AristideStrips() {
               target={b.url.startsWith("http") ? "_blank" : undefined}
               rel="noreferrer"
               onMouseEnter={() => setActive(i)}
+              onMouseLeave={() => setActive((cur) => (cur === i ? null : cur))}
               onFocus={() => setActive(i)}
+              onBlur={() => setActive((cur) => (cur === i ? null : cur))}
               className="group relative h-full overflow-hidden rounded-md outline-none ring-0 focus-visible:ring-2 focus-visible:ring-cream/60"
               style={{
-                flex: isActive ? "8 1 0%" : active !== null ? "0.6 1 0%" : "1 1 0%",
+                flex: isActive ? "8 1 0%" : active !== null ? "0.7 1 0%" : "1 1 0%",
                 transition:
-                  "flex-grow 900ms cubic-bezier(0.22, 1, 0.36, 1), filter 700ms ease",
+                  "flex-grow 900ms cubic-bezier(0.22, 1, 0.36, 1), filter 500ms ease",
                 filter: isDimmed
-                  ? "grayscale(1) brightness(0.55)"
-                  : isActive
-                    ? "grayscale(0) brightness(1)"
-                    : "grayscale(0.85) brightness(0.7)",
+                  ? "saturate(0.6) brightness(0.7)"
+                  : "saturate(1.05) brightness(1)",
               }}
               aria-label={b.name}
             >
