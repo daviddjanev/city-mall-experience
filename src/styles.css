@@ -69,6 +69,11 @@
 
   --ink: oklch(0.13 0.005 80);
   --cream: oklch(0.94 0.015 85);
+
+  /* Gold luxury accent */
+  --gold: oklch(0.82 0.13 82);
+  --gold-soft: oklch(0.88 0.09 85);
+  --gold-deep: oklch(0.66 0.13 70);
 }
 
 @theme inline {
@@ -79,6 +84,9 @@
   --color-brand-lime: var(--brand-lime);
   --color-ink: var(--ink);
   --color-cream: var(--cream);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-gold-deep: var(--gold-deep);
 }
 
 @layer base {
