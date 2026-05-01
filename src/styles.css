@@ -173,20 +173,16 @@
      Only color / glow / gradient transitions. No layout shifts.
      ============================================================ */
 
-  .hero-root [data-hero-transition] {
-    transition:
-      color 700ms cubic-bezier(0.22, 1, 0.36, 1),
-      background 700ms cubic-bezier(0.22, 1, 0.36, 1),
-      background-color 700ms cubic-bezier(0.22, 1, 0.36, 1),
-      border-color 700ms cubic-bezier(0.22, 1, 0.36, 1),
-      box-shadow 700ms cubic-bezier(0.22, 1, 0.36, 1),
-      text-shadow 700ms cubic-bezier(0.22, 1, 0.36, 1),
-      filter 700ms cubic-bezier(0.22, 1, 0.36, 1),
-      opacity 700ms cubic-bezier(0.22, 1, 0.36, 1);
-  }
 
-  /* Headline: "City Mall" — gold by default, neon orange→pink when scrolled */
-  .hero-citymall {
+  /* ----------------------------------------------------------
+     Scroll-driven interpolation. --neon ranges 0 → 1
+     Set as inline style on .hero-root from React.
+     Intensity reduced ~40% for premium subtle feel.
+     ---------------------------------------------------------- */
+  .hero-root { --neon: 0; }
+
+  /* Headline luxury layer (white/gold) — fades out as --neon → 1 */
+  .hero-citymall-luxury {
     background-image: linear-gradient(
       90deg,
       var(--gold-soft) 0%,
@@ -197,69 +193,122 @@
     background-clip: text;
     color: transparent;
     filter: drop-shadow(0 2px 14px oklch(0.82 0.13 82 / 0.18));
+    opacity: calc(1 - var(--neon));
   }
-  .hero-root.scrolled .hero-citymall {
+
+  /* Headline neon layer (orange→pink) — fades in as --neon → 1.
+     Subtle gradient, ~60% of full intensity. */
+  .hero-citymall-neon {
     background-image: linear-gradient(
       100deg,
-      oklch(0.82 0.18 55) 0%,
-      oklch(0.75 0.22 30) 35%,
-      oklch(0.70 0.25 5) 65%,
-      oklch(0.72 0.24 340) 100%
+      oklch(0.84 0.12 55) 0%,
+      oklch(0.78 0.16 30) 40%,
+      oklch(0.74 0.17 5) 70%,
+      oklch(0.76 0.16 340) 100%
     );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    opacity: var(--neon);
     filter:
-      drop-shadow(0 0 18px oklch(0.72 0.24 340 / 0.45))
-      drop-shadow(0 0 36px oklch(0.75 0.22 30 / 0.25));
+      drop-shadow(0 0 calc(11px * var(--neon)) oklch(0.76 0.16 340 / 0.27))
+      drop-shadow(0 0 calc(22px * var(--neon)) oklch(0.78 0.16 30 / 0.15));
   }
 
-  /* "Štip" — soft glow on scroll */
-  .hero-stip { text-shadow: 0 1px 0 oklch(0 0 0 / 0.2); }
-  .hero-root.scrolled .hero-stip {
+  /* "Štip" — gentle glow grows with neon */
+  .hero-stip {
     text-shadow:
-      0 0 22px oklch(0.95 0.05 60 / 0.35),
-      0 0 50px oklch(0.72 0.24 340 / 0.18);
+      0 1px 0 oklch(0 0 0 / 0.2),
+      0 0 calc(14px * var(--neon)) oklch(0.95 0.05 60 / 0.21),
+      0 0 calc(30px * var(--neon)) oklch(0.76 0.16 340 / 0.11);
   }
 
-  /* Eyebrow */
-  .hero-rule { background-color: var(--gold); }
-  .hero-root.scrolled .hero-rule {
-    background-image: linear-gradient(90deg, oklch(0.75 0.22 30), oklch(0.72 0.24 340));
-    background-color: transparent;
-    box-shadow: 0 0 10px oklch(0.72 0.24 340 / 0.6);
+  /* Eyebrow rule — gold → subtle warm gradient */
+  .hero-rule {
+    background-color: var(--gold);
+    background-image: linear-gradient(
+      90deg,
+      oklch(0.78 0.16 30),
+      oklch(0.76 0.16 340)
+    );
+    background-size: 100% 100%;
+    /* fade gold underneath via opacity blend using box-shadow glow */
+    box-shadow: 0 0 calc(6px * var(--neon)) oklch(0.76 0.16 340 / 0.36);
   }
-  .hero-eyebrow { color: var(--gold); }
-  .hero-root.scrolled .hero-eyebrow {
-    color: oklch(0.85 0.18 40);
-    text-shadow: 0 0 12px oklch(0.72 0.24 340 / 0.4);
+  .hero-eyebrow {
+    color: color-mix(
+      in oklab,
+      var(--gold) calc((1 - var(--neon)) * 100%),
+      oklch(0.85 0.16 40) calc(var(--neon) * 100%)
+    );
+    text-shadow: 0 0 calc(7px * var(--neon)) oklch(0.76 0.16 340 / 0.24);
   }
 
-  /* Primary CTA */
+  /* Primary CTA — gold → warm orange/pink gradient, gradual */
   .hero-cta-primary {
+    background-image:
+      linear-gradient(90deg, oklch(0.84 0.12 55), oklch(0.78 0.16 15), oklch(0.76 0.16 340)),
+      linear-gradient(90deg, var(--gold-soft), var(--gold), var(--gold-deep));
+    background-blend-mode: normal;
+    /* Layer two backgrounds, fade top via background-position trick won't blend.
+       Instead use overlay via opacity on a pseudo */
+    position: relative;
     background-image: linear-gradient(90deg, var(--gold-soft), var(--gold), var(--gold-deep));
-    box-shadow: 0 10px 40px -10px oklch(0.82 0.13 82 / 0.6);
-  }
-  .hero-root.scrolled .hero-cta-primary {
-    background-image: linear-gradient(90deg, oklch(0.82 0.18 55), oklch(0.72 0.24 15), oklch(0.72 0.24 340));
     box-shadow:
-      0 12px 36px -8px oklch(0.72 0.24 15 / 0.55),
-      0 0 28px oklch(0.72 0.24 340 / 0.45);
+      0 10px 40px -10px oklch(0.82 0.13 82 / calc(0.6 * (1 - var(--neon)))),
+      0 12px 30px -10px oklch(0.78 0.16 15 / calc(0.33 * var(--neon))),
+      0 0 calc(17px * var(--neon)) oklch(0.76 0.16 340 / 0.27);
   }
+  .hero-cta-primary::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-image: linear-gradient(
+      90deg,
+      oklch(0.84 0.12 55),
+      oklch(0.78 0.16 15),
+      oklch(0.76 0.16 340)
+    );
+    opacity: var(--neon);
+    pointer-events: none;
+    transition: opacity 200ms linear;
+  }
+  .hero-cta-primary > * { position: relative; z-index: 1; }
 
   /* Secondary CTA */
-  .hero-root.scrolled .hero-cta-ghost {
-    border-color: oklch(0.72 0.24 340 / 0.55);
-    box-shadow: 0 0 18px oklch(0.72 0.24 340 / 0.18) inset;
+  .hero-cta-ghost {
+    border-color: color-mix(
+      in oklab,
+      oklch(0.94 0.015 85 / 0.25) calc((1 - var(--neon)) * 100%),
+      oklch(0.76 0.16 340 / 0.45) calc(var(--neon) * 100%)
+    );
+    box-shadow: inset 0 0 calc(11px * var(--neon)) oklch(0.76 0.16 340 / 0.11);
   }
 
   /* Info bar */
-  .hero-root.scrolled .hero-infobar {
-    border-color: oklch(0.72 0.24 340 / 0.35);
+  .hero-infobar {
     box-shadow:
       0 20px 60px -20px oklch(0 0 0 / 0.6),
-      0 0 32px oklch(0.72 0.24 340 / 0.18);
+      0 0 calc(20px * var(--neon)) oklch(0.76 0.16 340 / 0.11);
+    border-color: color-mix(
+      in oklab,
+      oklch(0.94 0.015 85 / 0.15) calc((1 - var(--neon)) * 100%),
+      oklch(0.76 0.16 340 / 0.3) calc(var(--neon) * 100%)
+    );
   }
-  .hero-root.scrolled .hero-info-icon {
-    border-color: oklch(0.75 0.22 30 / 0.55);
-    color: oklch(0.85 0.18 40);
-    box-shadow: 0 0 14px oklch(0.72 0.24 340 / 0.25);
+  .hero-info-icon {
+    border-color: color-mix(
+      in oklab,
+      oklch(0.82 0.13 82 / 0.4) calc((1 - var(--neon)) * 100%),
+      oklch(0.78 0.16 30 / 0.5) calc(var(--neon) * 100%)
+    );
+    color: color-mix(
+      in oklab,
+      var(--gold) calc((1 - var(--neon)) * 100%),
+      oklch(0.85 0.16 40) calc(var(--neon) * 100%)
+    );
+    box-shadow: 0 0 calc(8px * var(--neon)) oklch(0.76 0.16 340 / 0.15);
   }
+}
 }
