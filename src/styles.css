@@ -167,4 +167,99 @@
     background-size: 200% 100%;
     animation: holo-sweep 6s linear infinite;
   }
+
+  /* ============================================================
+     HERO SPLIT IDENTITY — Luxury (default) → Neon (.scrolled)
+     Only color / glow / gradient transitions. No layout shifts.
+     ============================================================ */
+
+  .hero-root [data-hero-transition] {
+    transition:
+      color 700ms cubic-bezier(0.22, 1, 0.36, 1),
+      background 700ms cubic-bezier(0.22, 1, 0.36, 1),
+      background-color 700ms cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 700ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 700ms cubic-bezier(0.22, 1, 0.36, 1),
+      text-shadow 700ms cubic-bezier(0.22, 1, 0.36, 1),
+      filter 700ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Headline: "City Mall" — gold by default, neon orange→pink when scrolled */
+  .hero-citymall {
+    background-image: linear-gradient(
+      90deg,
+      var(--gold-soft) 0%,
+      var(--gold) 50%,
+      var(--gold-deep) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 2px 14px oklch(0.82 0.13 82 / 0.18));
+  }
+  .hero-root.scrolled .hero-citymall {
+    background-image: linear-gradient(
+      100deg,
+      oklch(0.82 0.18 55) 0%,
+      oklch(0.75 0.22 30) 35%,
+      oklch(0.70 0.25 5) 65%,
+      oklch(0.72 0.24 340) 100%
+    );
+    filter:
+      drop-shadow(0 0 18px oklch(0.72 0.24 340 / 0.45))
+      drop-shadow(0 0 36px oklch(0.75 0.22 30 / 0.25));
+  }
+
+  /* "Štip" — soft glow on scroll */
+  .hero-stip { text-shadow: 0 1px 0 oklch(0 0 0 / 0.2); }
+  .hero-root.scrolled .hero-stip {
+    text-shadow:
+      0 0 22px oklch(0.95 0.05 60 / 0.35),
+      0 0 50px oklch(0.72 0.24 340 / 0.18);
+  }
+
+  /* Eyebrow */
+  .hero-rule { background-color: var(--gold); }
+  .hero-root.scrolled .hero-rule {
+    background-image: linear-gradient(90deg, oklch(0.75 0.22 30), oklch(0.72 0.24 340));
+    background-color: transparent;
+    box-shadow: 0 0 10px oklch(0.72 0.24 340 / 0.6);
+  }
+  .hero-eyebrow { color: var(--gold); }
+  .hero-root.scrolled .hero-eyebrow {
+    color: oklch(0.85 0.18 40);
+    text-shadow: 0 0 12px oklch(0.72 0.24 340 / 0.4);
+  }
+
+  /* Primary CTA */
+  .hero-cta-primary {
+    background-image: linear-gradient(90deg, var(--gold-soft), var(--gold), var(--gold-deep));
+    box-shadow: 0 10px 40px -10px oklch(0.82 0.13 82 / 0.6);
+  }
+  .hero-root.scrolled .hero-cta-primary {
+    background-image: linear-gradient(90deg, oklch(0.82 0.18 55), oklch(0.72 0.24 15), oklch(0.72 0.24 340));
+    box-shadow:
+      0 12px 36px -8px oklch(0.72 0.24 15 / 0.55),
+      0 0 28px oklch(0.72 0.24 340 / 0.45);
+  }
+
+  /* Secondary CTA */
+  .hero-root.scrolled .hero-cta-ghost {
+    border-color: oklch(0.72 0.24 340 / 0.55);
+    box-shadow: 0 0 18px oklch(0.72 0.24 340 / 0.18) inset;
+  }
+
+  /* Info bar */
+  .hero-root.scrolled .hero-infobar {
+    border-color: oklch(0.72 0.24 340 / 0.35);
+    box-shadow:
+      0 20px 60px -20px oklch(0 0 0 / 0.6),
+      0 0 32px oklch(0.72 0.24 340 / 0.18);
+  }
+  .hero-root.scrolled .hero-info-icon {
+    border-color: oklch(0.75 0.22 30 / 0.55);
+    color: oklch(0.85 0.18 40);
+    box-shadow: 0 0 14px oklch(0.72 0.24 340 / 0.25);
+  }
 }
