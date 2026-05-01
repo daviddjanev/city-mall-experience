@@ -2,11 +2,23 @@ import { useEffect, useState } from "react";
 import { ArrowRight, ShoppingBag, Car, Coffee, Clock } from "lucide-react";
 import stipLogo from "@/assets/stipcitymall-logo.png";
 
+const EASE = (t: number) => {
+  // cubic-bezier(0.22, 1, 0.36, 1) approximation (easeOutQuint-ish)
+  return 1 - Math.pow(1 - t, 5);
+};
+
 export function Hero() {
-  const [scrolled, setScrolled] = useState(false);
+  const [neon, setNeon] = useState(0);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 100);
+    const START = 80;
+    const END = 350;
+    const onScroll = () => {
+      const y = window.scrollY;
+      const raw = (y - START) / (END - START);
+      const clamped = Math.max(0, Math.min(1, raw));
+      setNeon(EASE(clamped));
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -14,9 +26,8 @@ export function Hero() {
 
   return (
     <section
-      className={`hero-root relative min-h-screen w-full flex flex-col overflow-hidden bg-ink ${
-        scrolled ? "scrolled" : ""
-      }`}
+      className="hero-root relative min-h-screen w-full flex flex-col overflow-hidden bg-ink"
+      style={{ ["--neon" as string]: neon }}
     >
       {/* Background video — aerial loop */}
       <video
