@@ -112,6 +112,7 @@
 
 @layer utilities {
   .font-display { font-family: var(--font-display); font-optical-sizing: auto; }
+  .font-serif   { font-family: var(--font-serif); font-optical-sizing: auto; }
   .font-mono    { font-family: var(--font-mono); }
   .font-sans    { font-family: var(--font-sans); }
 
