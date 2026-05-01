@@ -174,14 +174,10 @@
      ============================================================ */
 
 
-  /* ----------------------------------------------------------
-     Scroll-driven interpolation. --neon ranges 0 → 1
-     Set as inline style on .hero-root from React.
-     Intensity reduced ~40% for premium subtle feel.
-     ---------------------------------------------------------- */
   .hero-root { --neon: 0; }
+  .hero-root.scrolled { --neon: 1; }
 
-  /* Headline luxury layer (white/gold) — fades out as --neon → 1 */
+  /* Headline luxury layer (white/gold) */
   .hero-citymall-luxury {
     background-image: linear-gradient(
       90deg,
@@ -193,11 +189,11 @@
     background-clip: text;
     color: transparent;
     filter: drop-shadow(0 2px 14px oklch(0.82 0.13 82 / 0.18));
-    opacity: calc(1 - var(--neon));
+    opacity: 1;
+    transition: opacity 800ms ease;
   }
 
-  /* Headline neon layer (orange→pink) — fades in as --neon → 1.
-     Subtle gradient, ~60% of full intensity. */
+  /* Headline neon layer (orange→pink) */
   .hero-citymall-neon {
     background-image: linear-gradient(
       100deg,
@@ -209,18 +205,25 @@
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    opacity: var(--neon);
-    filter:
-      drop-shadow(0 0 calc(11px * var(--neon)) oklch(0.76 0.16 340 / 0.27))
-      drop-shadow(0 0 calc(22px * var(--neon)) oklch(0.78 0.16 30 / 0.15));
+    opacity: 0;
+    transition: opacity 800ms ease;
+  }
+
+
+  .hero-root.scrolled .hero-citymall-luxury {
+    opacity: 0;
+  }
+
+  .hero-root.scrolled .hero-citymall-neon {
+    opacity: 1;
   }
 
   /* "Štip" — gentle glow grows with neon */
   .hero-stip {
     text-shadow:
       0 1px 0 oklch(0 0 0 / 0.2),
-      0 0 calc(14px * var(--neon)) oklch(0.95 0.05 60 / 0.21),
-      0 0 calc(30px * var(--neon)) oklch(0.76 0.16 340 / 0.11);
+      0 0 calc(9px * var(--neon)) oklch(0.95 0.05 60 / 0.14),
+      0 0 calc(19px * var(--neon)) oklch(0.76 0.16 340 / 0.07);
   }
 
   /* Eyebrow rule — gold → subtle warm gradient */
@@ -233,7 +236,7 @@
     );
     background-size: 100% 100%;
     /* fade gold underneath via opacity blend using box-shadow glow */
-    box-shadow: 0 0 calc(6px * var(--neon)) oklch(0.76 0.16 340 / 0.36);
+    box-shadow: 0 0 calc(4px * var(--neon)) oklch(0.76 0.16 340 / 0.22);
   }
   .hero-eyebrow {
     color: color-mix(
@@ -241,7 +244,7 @@
       var(--gold) calc((1 - var(--neon)) * 100%),
       oklch(0.85 0.16 40) calc(var(--neon) * 100%)
     );
-    text-shadow: 0 0 calc(7px * var(--neon)) oklch(0.76 0.16 340 / 0.24);
+    text-shadow: 0 0 calc(5px * var(--neon)) oklch(0.76 0.16 340 / 0.16);
   }
 
   /* Primary CTA — gold → warm orange/pink gradient, gradual */
@@ -256,8 +259,8 @@
     background-image: linear-gradient(90deg, var(--gold-soft), var(--gold), var(--gold-deep));
     box-shadow:
       0 10px 40px -10px oklch(0.82 0.13 82 / calc(0.6 * (1 - var(--neon)))),
-      0 12px 30px -10px oklch(0.78 0.16 15 / calc(0.33 * var(--neon))),
-      0 0 calc(17px * var(--neon)) oklch(0.76 0.16 340 / 0.27);
+      0 12px 30px -10px oklch(0.78 0.16 15 / calc(0.2 * var(--neon))),
+      0 0 calc(11px * var(--neon)) oklch(0.76 0.16 340 / 0.16);
   }
   .hero-cta-primary::before {
     content: "";
@@ -283,14 +286,14 @@
       oklch(0.94 0.015 85 / 0.25) calc((1 - var(--neon)) * 100%),
       oklch(0.76 0.16 340 / 0.45) calc(var(--neon) * 100%)
     );
-    box-shadow: inset 0 0 calc(11px * var(--neon)) oklch(0.76 0.16 340 / 0.11);
+    box-shadow: inset 0 0 calc(7px * var(--neon)) oklch(0.76 0.16 340 / 0.07);
   }
 
   /* Info bar */
   .hero-infobar {
     box-shadow:
       0 20px 60px -20px oklch(0 0 0 / 0.6),
-      0 0 calc(20px * var(--neon)) oklch(0.76 0.16 340 / 0.11);
+      0 0 calc(13px * var(--neon)) oklch(0.76 0.16 340 / 0.07);
     border-color: color-mix(
       in oklab,
       oklch(0.94 0.015 85 / 0.15) calc((1 - var(--neon)) * 100%),
@@ -308,7 +311,7 @@
       var(--gold) calc((1 - var(--neon)) * 100%),
       oklch(0.85 0.16 40) calc(var(--neon) * 100%)
     );
-    box-shadow: 0 0 calc(8px * var(--neon)) oklch(0.76 0.16 340 / 0.15);
+    box-shadow: 0 0 calc(5px * var(--neon)) oklch(0.76 0.16 340 / 0.09);
   }
 }
-}
+
