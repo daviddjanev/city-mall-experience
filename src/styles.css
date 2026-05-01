@@ -32,8 +32,9 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
   --font-display: 'Fraunces', Georgia, serif;
+  --font-serif: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
-  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-sans: 'Manrope', 'Inter', system-ui, sans-serif;
 }
 
 :root {
