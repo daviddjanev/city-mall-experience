@@ -107,10 +107,22 @@ export function Hero() {
               Štip
             </span>
             <span
-              className="hero-citymall block font-serif font-bold text-[clamp(3rem,8.5vw,7rem)] -mt-2"
-              data-hero-transition
+              className="relative block text-[clamp(3rem,8.5vw,7rem)] -mt-2 font-serif font-bold leading-[0.92]"
             >
-              City Mall
+              {/* Luxury layer (white/gold) */}
+              <span
+                className="hero-citymall-luxury block"
+                aria-hidden={false}
+              >
+                City Mall
+              </span>
+              {/* Neon layer (orange/pink) — absolutely overlaid, same position */}
+              <span
+                className="hero-citymall-neon absolute inset-0 block pointer-events-none"
+                aria-hidden="true"
+              >
+                City Mall
+              </span>
             </span>
           </h1>
 
