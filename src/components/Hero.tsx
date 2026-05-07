@@ -41,19 +41,19 @@ export function Hero() {
         aria-hidden="true"
       />
 
-      {/* Cinematic overlays */}
+      {/* Cinematic overlays — lighter so the video reads */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "linear-gradient(90deg, oklch(0.10 0.005 80 / 0.95) 0%, oklch(0.10 0.005 80 / 0.78) 28%, oklch(0.10 0.005 80 / 0.45) 55%, oklch(0.10 0.005 80 / 0.15) 80%, oklch(0.10 0.005 80 / 0.0) 100%)",
+            "linear-gradient(90deg, oklch(0.10 0.005 80 / 0.72) 0%, oklch(0.10 0.005 80 / 0.45) 30%, oklch(0.10 0.005 80 / 0.18) 60%, oklch(0.10 0.005 80 / 0.0) 100%)",
         }}
       />
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "linear-gradient(180deg, oklch(0.10 0.005 80 / 0.65) 0%, oklch(0.10 0.005 80 / 0.0) 18%, oklch(0.10 0.005 80 / 0.0) 55%, oklch(0.10 0.005 80 / 0.95) 100%)",
+            "linear-gradient(180deg, oklch(0.10 0.005 80 / 0.45) 0%, oklch(0.10 0.005 80 / 0.0) 22%, oklch(0.10 0.005 80 / 0.0) 60%, oklch(0.10 0.005 80 / 0.85) 100%)",
         }}
       />
       <div
