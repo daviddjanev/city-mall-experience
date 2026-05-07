@@ -197,30 +197,31 @@
   }
 
   /* Headline neon layer (orange→pink) — fades in as --neon → 1.
-     Subtle gradient, ~60% of full intensity. */
+     Strong saturation + clearly visible glow. */
   .hero-citymall-neon {
     background-image: linear-gradient(
       100deg,
-      oklch(0.84 0.12 55) 0%,
-      oklch(0.78 0.16 30) 40%,
-      oklch(0.74 0.17 5) 70%,
-      oklch(0.76 0.16 340) 100%
+      oklch(0.82 0.20 55) 0%,
+      oklch(0.74 0.24 28) 40%,
+      oklch(0.70 0.26 8) 70%,
+      oklch(0.72 0.24 340) 100%
     );
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     opacity: var(--neon);
     filter:
-      drop-shadow(0 0 calc(11px * var(--neon)) oklch(0.76 0.16 340 / 0.27))
-      drop-shadow(0 0 calc(22px * var(--neon)) oklch(0.78 0.16 30 / 0.15));
+      drop-shadow(0 0 calc(28px * var(--neon)) oklch(0.72 0.24 340 / 0.65))
+      drop-shadow(0 0 calc(56px * var(--neon)) oklch(0.74 0.24 28 / 0.45))
+      drop-shadow(0 0 calc(2px * var(--neon)) oklch(0.82 0.20 55 / 0.9));
   }
 
   /* "Štip" — gentle glow grows with neon */
   .hero-stip {
     text-shadow:
       0 1px 0 oklch(0 0 0 / 0.2),
-      0 0 calc(14px * var(--neon)) oklch(0.95 0.05 60 / 0.21),
-      0 0 calc(30px * var(--neon)) oklch(0.76 0.16 340 / 0.11);
+      0 0 calc(24px * var(--neon)) oklch(0.95 0.10 60 / 0.45),
+      0 0 calc(60px * var(--neon)) oklch(0.72 0.24 340 / 0.35);
   }
 
   /* Eyebrow rule — gold → subtle warm gradient */

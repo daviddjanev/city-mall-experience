@@ -56,17 +56,7 @@ export function TaxiBanner() {
             draggable={false}
           />
           <span className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-cream/10 group-hover:ring-cream/25 transition" />
-          <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/30 via-transparent to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-700" />
-          <style>{`
-            .taxi-img-hover:hover img { transform: scale(1.025); }
-          `}</style>
         </button>
-
-        <div className="mt-6 flex items-center justify-between font-mono text-[10px] tracking-[0.35em] text-cream/50">
-          <span>ŠTIP CITY TAXI</span>
-          <span className="text-cream/80">{PHONE} · 24/7</span>
-          <span>009 / 009</span>
-        </div>
       </div>
 
       <Dialog open={open} onOpenChange={setOpen}>
@@ -75,20 +65,16 @@ export function TaxiBanner() {
 
           <div className="relative">
             <img src={taxiBanner} alt="Štip City Taxi" className="w-full h-48 md:h-56 object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-              <p className="font-mono text-[10px] tracking-[0.35em] text-cream/60 mb-2">— MOBILITY</p>
-              <h2 className="font-display font-light text-4xl md:text-5xl leading-[0.95] tracking-[-0.02em]">
-                <span className="italic">Štip City</span>{" "}
-                <span className="font-semibold">Taxi</span>
-              </h2>
-              <p className="mt-2 font-display italic text-cream/70">
-                Брзо. Безбедно. Еколошки.
-              </p>
-            </div>
           </div>
 
           <div className="p-6 md:p-8 space-y-6">
+            <div>
+              <p className="font-mono text-[10px] tracking-[0.35em] text-cream/60 mb-2">— MOBILITY</p>
+              <h2 className="font-display font-light text-3xl md:text-4xl leading-[0.95] tracking-[-0.02em]">
+                <span className="italic">Štip City</span>{" "}
+                <span className="font-semibold">Taxi</span>
+              </h2>
+            </div>
             {/* Primary CTAs */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <a
